@@ -25,4 +25,6 @@ app.use(function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-app.listen(2000, () => console.log("Server started at http://localhost:2000"));
+const PORT = process.env.PORT || 4444
+
+app.listen(PORT, () => console.log("Server started at http://localhost:${PORT}"));
