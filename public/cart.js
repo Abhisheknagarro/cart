@@ -44,9 +44,9 @@ $(function(){
     });
   }
   refresh(0)
-  if(sessionStorage.getItem("Email") != ''){
-    $("#user_email").val(sessionStorage.getItem("Email"))
-      refresh(sessionStorage.getItem("Id"));
+  if(sessionStorage.getItem("Email").toString() != ''){
+    $("#user_email").val(sessionStorage.getItem("Email").toString())
+      refresh(sessionStorage.getItem("Id").toString());
   }
   
 })
