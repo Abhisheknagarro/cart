@@ -55,7 +55,6 @@ const Product = db.define("products", {
   }
 });
 Product.belongsTo(Vendor, { foreignKey: "Vendor_Id", targetKey: "Vendor_Id", onDelete: 'CASCADE' });
-Vendor.hasMany(Product);
 
 const Cart = db.define("carts", {
   Cart_Id: {
@@ -79,8 +78,7 @@ const Cart = db.define("carts", {
 });
 Cart.belongsTo(Product, { foreignKey: "Product_Id", targetKey: "Product_Id", onDelete: 'CASCADE' });
 Cart.belongsTo(User, { foreignKey: "User_Id", targetKey: "User_Id", onDelete: 'CASCADE' });
-Product.hasMany(Cart);
-User.hasMany(Cart)
+
 db.sync()
   .then(() => console.log("Database has been synced"))
   .catch(err => console.error("Error creating database"));

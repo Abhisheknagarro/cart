@@ -53,22 +53,41 @@ route.post("/", (req, res) => {
             });
           });
       } else {
-        Cart.update(
-          {
-            Quantity: Sequelize.literal("Quantity + 1")
-          },
-          {
-            where: {
-              [Op.and]: [
-                {
-                  Product_Id: parseInt(req.body.product_id),
-                  User_Id: parseInt(req.body.user_id)
-                }
-              ]
-            }
+        Product.findOne({
+          where: { Product_Id: parseInt(req.body.product_id) }
+        }).then(products => {
+          console.log(items[0].Quantity +" " + products.Quantity)
+          if(products.Quantity < items[0].Quantity + 1){
+            res.status(201).send({ message: "Item exceeds than available" });
           }
-        );
-        res.status(201).send({ message: "product added" });
+          else{
+            Cart.update(
+              {
+                Quantity: Sequelize.literal("Quantity + 1")
+              },
+              {
+                where: {
+                  [Op.and]: [
+                    {
+                      Product_Id: parseInt(req.body.product_id),
+                      User_Id: parseInt(req.body.user_id)
+                    }
+                  ]
+                }
+              }
+            ).then(cartitems => {
+              res.status(201).send({ message: "product added" });
+            }).catch(error => {
+              res.status(501).send({
+                error: "Error adding product"
+              });
+            });
+          }
+        }).catch(error => {
+          res.status(501).send({
+            error: "Error adding product"
+          });
+        });        
       }
     })
     .catch(error => {

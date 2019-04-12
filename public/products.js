@@ -62,7 +62,9 @@ $(function() {
       $.trim($("#product_name").val()) == "" ||
       $.trim($("#product_price").val()) == "" ||
       $.trim($("#product_vendor").val()) == "" ||
-      $.trim($("#product_qty").val()) == ""
+      $.trim($("#product_qty").val()) == "" ||
+      parseInt($.trim($("#product_qty").val())) <= 0 ||
+      parseInt($.trim($("#product_price").val())) <= 0
     ) {
       alert("not a valid value");
     } else {
