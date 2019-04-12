@@ -2,6 +2,14 @@
 $(function(){    
 
   function refresh(userid) {
+    if(userid === 0){
+      $("#producttable").empty();
+        $("#producttable").append(
+          `<tr> <td>No Item To View</td>
+          </tr>`
+        );
+    }
+    else{
     getproducts(userid, function(products) {
       var total_price = 0;
       $("#producttable").empty();
@@ -44,8 +52,9 @@ $(function(){
       }
     });
   }
+  }
   refresh(0)
-  if(sessionStorage.getItem("Email") != ''){
+  if(sessionStorage.getItem("Email") != null){
     $("#user_email").val(sessionStorage.getItem("Email"))
       refresh(sessionStorage.getItem("Id"));
   }
