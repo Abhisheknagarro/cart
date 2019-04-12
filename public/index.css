@@ -1,0 +1,102 @@
+body {
+    margin: 100px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #f7f7f7;
+}
+
+#foruserinput {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#forproductdisplay {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 350px;
+    overflow: scroll;
+}
+.btn-primary {
+    float: right;
+}
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-columns {
+        column-count: 4;
+    }
+}
+form {
+    margin-left: 250px;
+    margin-top: 30px;
+}
+
+.navbar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 5px;
+}
+a {
+  color: #0a0a0a;
+  text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+.bg-image-full {
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.bg-dark {
+    background-color: #222!important;
+}
+
+.mx-background-top-linear {
+    background: -webkit-linear-gradient(45deg, #54d400 48%, #1b1e21 48%);
+    background: -webkit-linear-gradient(left, #54d400 48%, #1b1e21 48%);
+    background: linear-gradient(45deg, #54d400 48%, #1b1e21 48%);
+}
+
+#footer {
+    background: -webkit-linear-gradient(45deg, #54d400 48%, #1b1e21 48%);
+    background: -webkit-linear-gradient(left, #54d400 48%, #1b1e21 48%);
+    background: linear-gradient(45deg, #54d400 48%, #1b1e21 48%);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
