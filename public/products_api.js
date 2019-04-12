@@ -1,5 +1,5 @@
-function getvender(done) {
-  $.get("/api/vender", data => {
+function getvendor(done) {
+  $.get("/api/vendor", data => {
     console.log(data);
     done(data);
   });
@@ -15,7 +15,7 @@ function getproducts(done) {
 function addproduct(
   productname,
   productprice,
-  productvender,
+  productvendor,
   productqty,
   done
 ) {
@@ -24,7 +24,7 @@ function addproduct(
         {
           product_name: productname,
           product_price: productprice,
-          product_vender: productvender,
+          product_vendor: productvendor,
           product_qty: productqty
 
         },
@@ -34,12 +34,12 @@ function addproduct(
       );
 }
 
-function deleteproductcall(productname, vendername, done) {
+function deleteproductcall(productname, vendorname, done) {
   $.ajax({
     url: '/api/product',    
     type: "DELETE",
     dataType: 'json',
-    data: {product_name: productname.trim(), vender_name: vendername.trim() },
+    data: {product_name: productname.trim(), vendor_name: vendorname.trim() },
     success: function (data) {
         done(data);
     },

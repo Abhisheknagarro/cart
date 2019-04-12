@@ -17,13 +17,13 @@ const User = db.define("users", {
   }
 });
 
-const Vender = db.define("venders", {
-  Vender_Id: {
+const Vendor = db.define("vendors", {
+  Vendor_Id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  Vender_Name: {
+  Vendor_Name: {
     type: Sequelize.STRING,
     allowNull: false
   }
@@ -39,7 +39,7 @@ const Product = db.define("products", {
     type: Sequelize.STRING,
     allowNull: false
   },
-  Vender_Id: {
+  Vendor_Id: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
@@ -54,8 +54,8 @@ const Product = db.define("products", {
     defaultValue: 0
   }
 });
-Product.belongsTo(Vender, { foreignKey: "Vender_Id", targetKey: "Vender_Id", onDelete: 'CASCADE' });
-Vender.hasMany(Product);
+Product.belongsTo(Vendor, { foreignKey: "Vendor_Id", targetKey: "Vendor_Id", onDelete: 'CASCADE' });
+Vendor.hasMany(Product);
 
 const Cart = db.define("carts", {
   Cart_Id: {
@@ -89,6 +89,6 @@ exports = module.exports = {
   User: User,
   Product: Product,
   Cart: Cart,
-  Vender: Vender,
+  Vendor: Vendor,
   db: db
 };

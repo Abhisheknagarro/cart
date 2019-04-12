@@ -1,12 +1,12 @@
-const Vender = require("../../db").Vender;
+const Vendor = require("../../db").Vendor;
 const Product = require("../../db").Product;
 const route = require("express").Router();
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
 route.get("/", (req, res) => {
-  // Get all venders
-  Product.findAll({ include: [Vender] })
+  // Get all vendors
+  Product.findAll({ include: [Vendor] })
     .then(products => {
       res.status(200).send(products);
     })
@@ -23,7 +23,7 @@ route.post("/", (req, res) => {
       [Op.and]: [
         {
           Product_Name: req.body.product_name,
-          Vender_Id: parseInt(req.body.product_vender)
+          Vendor_Id: parseInt(req.body.product_vendor)
         }
       ]
     }
@@ -32,7 +32,7 @@ route.post("/", (req, res) => {
       if (products.length == 0) {
         Product.create({
           Product_Name: req.body.product_name,
-          Vender_Id: parseInt(req.body.product_vender),
+          Vendor_Id: parseInt(req.body.product_vendor),
           Price: parseInt(req.body.product_price),
           Quantity: parseInt(req.body.product_qty)
         })
@@ -56,16 +56,16 @@ route.post("/", (req, res) => {
 });
 
 route.delete("/", (req, res) => {
-  Vender.findOne({
-    where: { Vender_Name: req.body.vender_name }
+  Vendor.findOne({
+    where: { Vendor_Name: req.body.vendor_name }
   })
-    .then(vender => {
+    .then(vendor => {
       Product.destroy({
         where: {
           [Op.and]: [
             {
               Product_Name: req.body.product_name,
-              Vender_Id: vender.Vender_Id
+              Vendor_Id: vendor.Vendor_Id
             }
           ]
         }

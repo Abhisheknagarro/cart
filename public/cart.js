@@ -22,7 +22,7 @@ $(function(){
         $("#producttable").append(
         `<tr>
             <td>Product_Id</td>
-            <td>Product_Name</td><td>Vender_Name
+            <td>Product_Name</td><td>Vendor_Name
             </td><td>Price</td><td>Quantity</td>
             <td>
               Delete</td>
@@ -33,7 +33,7 @@ $(function(){
             `<tr>
             <td>${todo.Product_Id}</td>
             <td>${todo.product.Product_Name}</td><td>${
-              todo.product.vender.Vender_Name
+              todo.product.vendor.Vendor_Name
             } </td><td>${todo.product.Price * todo.Quantity}</td><td> ${todo.Quantity} </td>
             <td><button
               type="button"
@@ -53,14 +53,30 @@ $(function(){
     });
   }
   }
-  refresh(0)
+  
   if(sessionStorage.getItem("Email") != null){
     $("#user_email").val(sessionStorage.getItem("Email"))
+    $("#login").hide();
+        $("#logout").show();  
       refresh(sessionStorage.getItem("Id"));
+  }
+  else{
+    $("#user_email").val("");
+        $("#login").show();
+        $("#logout").hide(); 
+    refresh(0)
   }
   
 })
 function refresh(userid) {
+  if(userid === 0){
+    $("#producttable").empty();
+      $("#producttable").append(
+        `<tr> <td>No Item To View</td>
+        </tr>`
+      );
+  }
+  else{
     getproducts(userid, function(products) {
       var total_price = 0;
       $("#producttable").empty();
@@ -73,7 +89,7 @@ function refresh(userid) {
         $("#producttable").append(
           `<tr>
               <td>Product_Id</td>
-              <td>Product_Name</td><td>Vender_Name
+              <td>Product_Name</td><td>Vendor_Name
               </td><td>Price</td><td>Quantity</td>
               <td>
                 Delete</td>
@@ -84,7 +100,7 @@ function refresh(userid) {
             `<tr>
             <td>${todo.Product_Id}</td>
             <td>${todo.product.Product_Name}</td><td>${
-              todo.product.vender.Vender_Name
+              todo.product.vendor.Vendor_Name
             } </td><td>${todo.product.Price * todo.Quantity}</td><td> ${todo.Quantity} </td>
             <td><button
               type="button"
@@ -103,9 +119,10 @@ function refresh(userid) {
       }
     });
   }
+  }
 
 function loginuser() {
-    let email = $.trim($("#user_email").val());
+    let email = $.trim($("#user_email").val()).toLowerCase();
     if (email == "") {
       alert("not a valid email");
     } else {
@@ -113,6 +130,8 @@ function loginuser() {
         if (user.Email === email) {
           sessionStorage.setItem("Email", email);
           sessionStorage.setItem("Id", user.User_Id);
+          $("#login").hide();
+          $("#logout").show();
           refresh(sessionStorage.getItem("Id").toString());
         } else {
           alert("Email is not valid");
@@ -120,6 +139,15 @@ function loginuser() {
       });
     }
   }
+
+  function logoutuser(){
+    sessionStorage.clear("Email");
+    sessionStorage.clear("Id");
+    $("#user_email").val("");
+    $("#logout").hide();
+    $("#login").show();          
+    refresh(0);
+}
 
 
   function deletecart(e){

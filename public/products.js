@@ -1,7 +1,7 @@
 $(function() {
   let productname = $("#product_name");
   let productprice = $("#product_price");
-  let productvender = $("#product_vender");
+  let productvendor = $("#product_vendor");
   let productqty = $("#product_qty");
 
   function refresh() {
@@ -15,7 +15,7 @@ $(function() {
       } else {
         $("#producttable").append(
           `<tr>
-          <td>Product_Name</td><td>Vender_Name
+          <td>Product_Name</td><td>Vendor_Name
           </td><td>Price</td><td>Quantity </td>
           <td>
             Delete</td>
@@ -25,7 +25,7 @@ $(function() {
           $("#producttable").append(
             `<tr>
             <td>${todo.Product_Name}</td><td>${
-              todo.vender.Vender_Name
+              todo.vendor.Vendor_Name
             } </td><td>${todo.Price}</td><td> ${todo.Quantity} </td>
             <td><button
               type="button"
@@ -42,13 +42,13 @@ $(function() {
   }
   refresh();
   function dropdownval() {
-    getvender(function(venders) {
-      $("#product_vender").empty();
-      for (let todo of venders) {
-        console.log(todo.Vender_Name);
-        $("#product_vender").append(
-          `<option value='${todo.Vender_Id}'
-                >${todo.Vender_Name}</option
+    getvendor(function(vendors) {
+      $("#product_vendor").empty();
+      for (let todo of vendors) {
+        console.log(todo.Vendor_Name);
+        $("#product_vendor").append(
+          `<option value='${todo.Vendor_Id}'
+                >${todo.Vendor_Name}</option
               >`
         );
       }
@@ -61,7 +61,7 @@ $(function() {
     if (
       $.trim($("#product_name").val()) == "" ||
       $.trim($("#product_price").val()) == "" ||
-      $.trim($("#product_vender").val()) == "" ||
+      $.trim($("#product_vendor").val()) == "" ||
       $.trim($("#product_qty").val()) == ""
     ) {
       alert("not a valid value");
@@ -69,7 +69,7 @@ $(function() {
       addproduct(
         productname.val(),
         productprice.val(),
-        productvender.val(),
+        productvendor.val(),
         productqty.val(),
         function(addedproduct) {
           alert(addedproduct.message)
@@ -91,7 +91,7 @@ function refresh() {
     } else {
       $("#producttable").append(
         `<tr>
-        <td>Product_Name</td><td>Vender_Name
+        <td>Product_Name</td><td>Vendor_Name
         </td><td>Price</td><td>Quantity </td>
         <td>
           Delete</td>
@@ -101,7 +101,7 @@ function refresh() {
         $("#producttable").append(
           `<tr>
           <td>${todo.Product_Name}</td><td>${
-            todo.vender.Vender_Name
+            todo.vendor.Vendor_Name
           } </td><td>${todo.Price}</td><td> ${todo.Quantity} </td>
           <td><button
             type="button"

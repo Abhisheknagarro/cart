@@ -17,7 +17,7 @@ $(function(){
                       ${todo.Product_Name}
         </div>
                   <div class="card-body" >
-                  <h5 class="card-title" id="vender_name">Vender Name: ${todo.vender.Vender_Name}</h5>
+                  <h5 class="card-title" id="vendor_name">Vendor Name: ${todo.vendor.Vendor_Name}</h5>
                   <h6 class="card-subtitle mb-2 text-muted" id="product_id"><span>Product Id:</span><span> ${
                     todo.Product_Id
                   }</span></h6>
@@ -38,9 +38,17 @@ $(function(){
         });
         
       }
-      if(sessionStorage.getItem("Email") != '' || sessionStorage.getItem("Email") != null){
-        $("#user_email").val(sessionStorage.getItem("Email"))        
+      if(sessionStorage.getItem("Email") != null){
+        $("#user_email").val(sessionStorage.getItem("Email")) 
+        $("#login").hide();
+        $("#logout").show();       
         displayproduct()        
+      }
+      else{
+        $("#user_email").val("");
+        $("#login").show();
+        $("#logout").hide();        
+        displayproduct() 
       }
       
 })
@@ -62,7 +70,7 @@ function displayproduct() {
                 ${todo.Product_Name}
   </div>
             <div class="card-body">
-            <h5 class="card-title" id="vender_name">Vender Name: ${todo.vender.Vender_Name}</h5>
+            <h5 class="card-title" id="vendor_name">Vendor Name: ${todo.vendor.Vendor_Name}</h5>
             <h6 class="card-subtitle mb-2 text-muted" id="product_id"><span>Product Id:</span><span> ${
               todo.Product_Id
             }</span></h6>
@@ -84,7 +92,7 @@ function displayproduct() {
 }
 
 function loginuser() {
-  let email = $.trim($("#user_email").val());
+  let email = $.trim($("#user_email").val()).toLowerCase();
   if (email == "") {
     alert("not a valid email");
   } else {
@@ -92,12 +100,23 @@ function loginuser() {
       if (user.Email === email) {
         sessionStorage.setItem("Email", email);
         sessionStorage.setItem("Id", user.User_Id);
+        $("#login").hide();
+        $("#logout").show();  
         displayproduct();
       } else {
         alert("Email is not valid");
       }
     });
   }
+}
+
+function logoutuser(){
+        sessionStorage.clear("Email");
+        sessionStorage.clear("Id");
+        $("#user_email").val("");
+        $("#logout").hide();
+        $("#login").show();          
+        displayproduct();
 }
 function addtocart(e) {
   if(sessionStorage.getItem("Id") == null){

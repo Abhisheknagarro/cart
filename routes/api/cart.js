@@ -1,19 +1,19 @@
 const Cart = require("../../db").Cart;
-const Vender = require("../../db").Vender;
+const Vendor = require("../../db").Vendor;
 const Product = require("../../db").Product;
 const route = require("express").Router();
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
 route.get("/", (req, res) => {
-  // Get all venders
+  // Get all vendors
   Cart.findAll({
     where: {
       User_Id: parseInt(req.query.user_id)
     },
     include: [
       { model: Product },
-      { model: Product, include: [{ model: Vender }] }
+      { model: Product, include: [{ model: Vendor }] }
     ]
   })
     .then(products => {

@@ -1,8 +1,8 @@
-function addvender(vendername, done) {
+function addvendor(vendorname, done) {
   $.post(
-    "/api/vender",
+    "/api/vendor",
     {
-      vender_name: vendername
+      vendor_name: vendorname
     },
     function(data) {
       done(data);
@@ -10,19 +10,19 @@ function addvender(vendername, done) {
   );
 }
 
-function getvender(done) {
-  $.get("/api/vender", data => {
+function getvendor(done) {
+  $.get("/api/vendor", data => {
     console.log(data);
     done(data);
   });
 }
 
-function deletevendercall(vendername, done) {
+function deletevendorcall(vendorname, done) {
   $.ajax({
-    url: '/api/vender',    
+    url: '/api/vendor',    
     type: "DELETE",
     dataType: 'json',
-    data: {vender_name: vendername.trim() },
+    data: {vendor_name: vendorname.trim() },
     success: function (data) {
         done(data);
     },

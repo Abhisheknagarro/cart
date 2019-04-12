@@ -8,13 +8,13 @@ body {
     background-color: #f7f7f7;
 }
 
-#forvenderinput {
+#forvendorinput {
     border: 1px solid black;
     border-radius: 10px;
     margin-top: 15px;
     margin-bottom: 15px;
 }
-#forvenderdisplay {
+#forvendordisplay {
     border: 1px solid black;
     border-radius: 10px;
     margin-top: 5px;
